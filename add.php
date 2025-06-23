@@ -5,16 +5,18 @@ require_once 'includes/UserManager.php';
 
 $message = '';
 $name = '';
+$firstname = '';
 $email = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['name']);
+    $firstname = trim($_POST['firstname']);
     $email = trim($_POST['email']);
 
     if (!empty($name) && !empty($email)) {
         try {
             $userManager = new UserManager();
-            $newUser = new User(null, $name, $email);
+            $newUser = new User(null, $name, $firstname, $email);
             $userId = $userManager->create($newUser);
 
             header("Location: index.php?message=Utilisateur ajouté avec succès");
@@ -38,6 +40,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="form-group">
         <label for="name">Nom :</label>
         <input type="text" id="name" name="name" value="<?= htmlspecialchars($name) ?>" required>
+    </div>
+
+    <div class="form-group">
+        <label for="firstname">Firstname :</label>
+        <input type="firstname" id="firstname" name="firstname" value="<?= htmlspecialchars($firstname) ?>" required>
     </div>
 
     <div class="form-group">

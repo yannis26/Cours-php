@@ -11,8 +11,9 @@ class UserManager {
     }
 
     public function create(User $user) {
-        $stmt = $this->db->prepare("INSERT INTO users (name, email) VALUES (:name, :email)");
+        $stmt = $this->db->prepare("INSERT INTO users (name, firstname, email) VALUES (:name, :firstname, :email)"  );
         $stmt->bindValue(':name', $user->getName());
+        $stmt->bindValue(':firstname', $user->getFirstname());
         $stmt->bindValue(':email', $user->getEmail());
         $stmt->execute();
 
@@ -27,7 +28,7 @@ class UserManager {
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($data) {
-            return new User($data['id'], $data['name'], $data['email']);
+            return new User($data['id'], $data['name'], $data['firstname'], $data['email']);
         }
 
         return null;
@@ -38,7 +39,7 @@ class UserManager {
         $users = [];
 
         while ($data = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $users[] = new User($data['id'], $data['name'], $data['email']);
+            $users[] = new User($data['id'], $data['name'], $data['firstname'], $data['email']);
         }
 
         return $users;
@@ -47,6 +48,7 @@ class UserManager {
     public function update(User $user) {
         $stmt = $this->db->prepare("UPDATE users SET name = :name, email = :email WHERE id = :id");
         $stmt->bindValue(':name', $user->getName());
+        $stmt->bindValue(':firstname', $user->getFirstname());
         $stmt->bindValue(':email', $user->getEmail());
         $stmt->bindValue(':id', $user->getId());
 

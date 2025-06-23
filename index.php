@@ -18,6 +18,7 @@ $users = $userManager->readAll();
         <tr>
             <th>ID</th>
             <th>Nom</th>
+            <th>Firstname</th>
             <th>Email</th>
             <th>Actions</th>
         </tr>
@@ -27,6 +28,7 @@ $users = $userManager->readAll();
         <tr>
             <td><?= htmlspecialchars($user->getId()) ?></td>
             <td><?= htmlspecialchars($user->getName()) ?></td>
+            <td><?= htmlspecialchars($user->getFirstname()) ?></td>
             <td><?= htmlspecialchars($user->getEmail()) ?></td>
             <td>
                 <a href="edit.php?id=<?= $user->getId() ?>" class="btn btn-edit">Modifier</a>
