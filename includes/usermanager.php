@@ -11,14 +11,16 @@ class UserManager {
     }
 
     public function create(User $user) {
-        $stmt = $this->db->prepare("INSERT INTO users (name, firstname, email) VALUES (:name, :firstname, :email)"  );
-        $stmt->bindValue(':name', $user->getName());
-        $stmt->bindValue(':firstname', $user->getFirstname());
-        $stmt->bindValue(':email', $user->getEmail());
-        $stmt->execute();
+    $stmt = $this->db->prepare("INSERT INTO users (name, firstname, email) VALUES (:name, :firstname, :email)");
+    
+    $stmt->bindValue(':name', $user->getName());
+    $stmt->bindValue(':firstname', $user->getFirstname());
+    $stmt->bindValue(':email', $user->getEmail());
 
-        return $this->db->lastInsertId();
-    }
+    $stmt->execute();
+
+    return $this->db->lastInsertId();
+}
 
     public function read($id) {
         $stmt = $this->db->prepare("SELECT * FROM users WHERE id = :id");
@@ -46,7 +48,7 @@ class UserManager {
     }
 
     public function update(User $user) {
-        $stmt = $this->db->prepare("UPDATE users SET name = :name, email = :email WHERE id = :id");
+        $stmt = $this->db->prepare("UPDATE users SET name = :name, firstname = :firstname, email = :email WHERE id = :id");
         $stmt->bindValue(':name', $user->getName());
         $stmt->bindValue(':firstname', $user->getFirstname());
         $stmt->bindValue(':email', $user->getEmail());
