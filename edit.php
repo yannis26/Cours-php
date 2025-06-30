@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <div class="form-group">
-        <label for="firstname">Firstname :</label>
+        <label for="firstname">Prénom :</label>
         <input type="firstname" id="firstname" name="firstname" value="<?= htmlspecialchars($firstname) ?>" required>
     </div>
 

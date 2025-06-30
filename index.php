@@ -2,6 +2,8 @@
 require_once 'includes/header.php';
 require_once 'includes/User.php';
 require_once 'includes/UserManager.php';
+require_once 'includes/Session.php';
+//Session::redirectIfNotLoggedIn();
 
 $userManager = new UserManager();
 $users = $userManager->readAll();
@@ -18,7 +20,7 @@ $users = $userManager->readAll();
         <tr>
             <th>ID</th>
             <th>Nom</th>
-            <th>Firstname</th>
+            <th>Prénom</th>
             <th>Email</th>
             <th>Actions</th>
         </tr>
