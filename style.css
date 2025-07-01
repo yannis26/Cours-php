@@ -205,3 +205,12 @@ form {
     margin-bottom: 20px;
     text-align: center;
 }
+
+.login-btn {
+    background: #5dade2;
+    color: var(--white);
+}
+
+.login-btn:hover {
+    background: #3498db;
+}

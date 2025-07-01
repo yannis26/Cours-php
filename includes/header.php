@@ -16,13 +16,14 @@ function getSessionSafe($key, $default = '') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des Utilisateurs</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/auth/auth.css">
 </head>
 <body>
     <div class="container">
         <h1>Gestion des Utilisateurs</h1>
         <nav>
-            <a href="index.php">Liste des utilisateurs</a>
-            <a href="add.php">Ajouter un utilisateur</a>
+            <a href="/index.php">Liste des utilisateurs</a>
+            <a href="/add.php">Ajouter un utilisateur</a>
 
             <?php if (isset($_SESSION['user_id'])): ?>
                 <div class="user-section">

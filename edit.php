@@ -19,11 +19,13 @@ if (!$user) {
 $message = '';
 $name = $user->getName();
 $firstname = $user->getFirstname();
+$username = $user->getUsername();
 $email = $user->getEmail();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['name']);
     $firstname = trim($_POST['firstname']);
+    $username = trim($_POST['username']);
     $email = trim($_POST['email']);
 
     if (!empty($name) && !empty($email)) {
@@ -31,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $user->setName($name);
             $user->setFirstname($firstname);
             $user->setEmail($email);
+            $user->setUsername($username);
             $userManager->update($user);
 
             header("Location: index.php?message=Utilisateur mis à jour avec succès");
@@ -61,6 +64,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="form-group">
         <label for="firstname">Prénom :</label>
         <input type="firstname" id="firstname" name="firstname" value="<?= htmlspecialchars($firstname) ?>" required>
+    </div>
+
+    <div class="form-group">
+        <label for="username">Nom d'utilisateur :</label>
+        <input type="text" id="username" name="username" value="<?= htmlspecialchars($username) ?>" required>
     </div>
 
     <div class="form-group">

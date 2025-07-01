@@ -19,6 +19,7 @@ class UserManager {
         $stmt->bindValue(':firstname', $user->getFirstname());
         $stmt->bindValue(':username', $user->getUsername());
         $stmt->bindValue(':email', $user->getEmail());
+        $stmt->bindValue(':password', $user->getPassword());
         $stmt->execute();
 
         return $this->db->lastInsertId();
@@ -65,20 +66,36 @@ class UserManager {
         return $users;
     }
 
-    public function update(User $user) {
-        $stmt = $this->db->prepare(
-            "UPDATE users SET 
-            username = :username, 
-            email = :email 
-            WHERE id = :id"
-            );
+public function update(User $user) {
+    // On prépare la requête de base, sans password
+    $sql = "UPDATE users SET 
+                name = :name, 
+                firstname = :firstname,
+                username = :username, 
+                email = :email";
 
-        $stmt->bindValue(':name', $user->getUsername());
-        $stmt->bindValue(':email', $user->getEmail());
-        $stmt->bindValue(':id', $user->getId());
-
-        return $stmt->execute();
+    // Si le mot de passe est fourni (non null et non vide), on l'ajoute
+    if ($user->getPassword()) {
+        $sql .= ", password = :password";
     }
+
+    $sql .= " WHERE id = :id";
+
+    $stmt = $this->db->prepare($sql);
+
+    $stmt->bindValue(':name', $user->getName());
+    $stmt->bindValue(':firstname', $user->getFirstname());
+    $stmt->bindValue(':username', $user->getUsername());
+    $stmt->bindValue(':email', $user->getEmail());
+    $stmt->bindValue(':id', $user->getId());
+
+    if ($user->getPassword()) {
+        $stmt->bindValue(':password', $user->getPassword());
+    }
+
+    return $stmt->execute();
+}
+
 
     public function delete($id) {
         $stmt = $this->db->prepare(

@@ -1,5 +1,4 @@
 <?php
-require_once '../includes/header.php';
 require_once '../includes/Auth.php';
 
 $auth = new Auth();
@@ -19,10 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
+<head><link rel="stylesheet" href="auth.css"></head>
 <div class="auth-container">
     <h2>Connexion</h2>
-    <link rel="stylesheet" href="style.css">
     <?php if ($error): ?>
         <div class="error"><?= htmlspecialchars($error) ?></div>
     <?php endif; ?>

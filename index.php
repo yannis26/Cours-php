@@ -22,6 +22,7 @@ $users = $userManager->readAll();
             <th>Nom</th>
             <th>Prénom</th>
             <th>Email</th>
+            <th>Pseudo</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -32,6 +33,7 @@ $users = $userManager->readAll();
             <td><?= htmlspecialchars($user->getName()) ?></td>
             <td><?= htmlspecialchars($user->getFirstname()) ?></td>
             <td><?= htmlspecialchars($user->getEmail()) ?></td>
+            <td><?= htmlspecialchars($user->getUsername()) ?></td>
             <td>
                 <a href="edit.php?id=<?= $user->getId() ?>" class="btn btn-edit">Modifier</a>
                 <a href="delete.php?id=<?= $user->getId() ?>" class="btn btn-delete" 

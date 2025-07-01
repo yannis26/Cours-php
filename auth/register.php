@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
+<head><link rel="stylesheet" href="regi.css"></head>
 <div class="auth-container">
     <h2>Inscription</h2>
 

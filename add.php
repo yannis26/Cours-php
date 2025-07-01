@@ -6,17 +6,22 @@ require_once 'includes/UserManager.php';
 $message = '';
 $name = '';
 $firstname = '';
+$username = '';
 $email = '';
+$password = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['name']);
     $firstname = trim($_POST['firstname']);
+    $username = trim($_POST['username']);
     $email = trim($_POST['email']);
+    $password = $_POST['password']; // ne pas trim() un mot de passe, juste récupérer
 
-    if (!empty($name) && !empty($email)) {
+    if (!empty($name) && !empty($firstname) && !empty($username) && !empty($email) && !empty($password)) {
         try {
             $userManager = new UserManager();
-            $newUser = new User(null, $name, $firstname, $email);
+            $newUser = new User(null, $name, $firstname, $username, $email);
+            $newUser->setPassword($password); // hash automatique
             $userId = $userManager->create($newUser);
 
             header("Location: index.php?message=Utilisateur ajouté avec succès");
@@ -44,12 +49,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="form-group">
         <label for="firstname">Prénom :</label>
-        <input type="firstname" id="firstname" name="firstname" value="<?= htmlspecialchars($firstname) ?>" required>
+        <input type="text" id="firstname" name="firstname" value="<?= htmlspecialchars($firstname) ?>" required>
+    </div>
+
+    <div class="form-group">
+        <label for="username">Nom d'utilisateur :</label>
+        <input type="text" id="username" name="username" value="<?= htmlspecialchars($username) ?>" required>
     </div>
 
     <div class="form-group">
         <label for="email">Email :</label>
         <input type="email" id="email" name="email" value="<?= htmlspecialchars($email) ?>" required>
+    </div>
+
+    <div class="form-group">
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" name="password" required>
     </div>
 
     <div class="form-group">
